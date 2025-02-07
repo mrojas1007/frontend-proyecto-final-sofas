@@ -1,33 +1,36 @@
-import CryptoJs from 'crypto-js';
+import CryptoJS from 'crypto-js';
 import { useState } from 'react';
+
 const { VITE_CRYPTOJS_SECRET } = import.meta.env;
 
-export const useEncrypt = () => {
+const useEncrypt = () => {
 	const [encrypted, setEncrypted] = useState(null);
 	const [decrypted, setDecrypted] = useState(null);
 
-	const handleEncrypt = (data) => {
-		const encryptedData = CryptoJs.AES.encrypt(
-			JSON.stringify(data),
+	const handleEncrypt = (session) => {
+		const sessionEncrypted = CryptoJS.AES.encrypt(
+			JSON.stringify(session),
 			String(VITE_CRYPTOJS_SECRET)
 		).toString();
 
-		setEncrypted(encryptedData);
+		setEncrypted(sessionEncrypted);
 	};
 
-	const handleDecrypt = (encryptedData) => {
-		const decryptedData = CryptoJs.AES.decrypt(
-			encryptedData,
+	const handleDecrypt = (sessionEncrypted) => {
+		const sessionDecrypted = CryptoJS.AES.decrypt(
+			sessionEncrypted,
 			String(VITE_CRYPTOJS_SECRET)
-		).toString(CryptoJs.enc.Utf8);
+		).toString(CryptoJS.enc.Utf8);
 
-		setDecrypted(decryptedData);
+		setDecrypted(sessionDecrypted);
 	};
 
 	return {
 		encrypted,
 		decrypted,
-		handleEncrypt,
 		handleDecrypt,
+		handleEncrypt,
 	};
 };
+
+export default useEncrypt;

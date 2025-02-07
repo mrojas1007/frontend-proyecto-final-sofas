@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useEncrypt } from './useEncrypt';
+import useEncrypt from './useEncrypt';
 
-export const useStorage = () => {
-	const { encrypted, decrypted, handleEncrypt, handleDecrypt } = useEncrypt();
+const useStorage = () => {
+	const { encrypted, decrypted, handleDecrypt, handleEncrypt } = useEncrypt();
 
 	const handleSetStorageSession = (session) => {
 		handleEncrypt(session);
@@ -10,7 +10,6 @@ export const useStorage = () => {
 
 	const handleGetStorageSession = () => {
 		const encryptedSession = localStorage.getItem('USER_SESSION');
-
 		if (encryptedSession) {
 			handleDecrypt(encryptedSession);
 		}
@@ -28,3 +27,5 @@ export const useStorage = () => {
 		decrypted,
 	};
 };
+
+export default useStorage;

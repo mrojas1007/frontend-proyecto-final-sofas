@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Page404 = () => {
+const NotFound = () => {
 	return (
 		<Fragment>
 			<section className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
@@ -24,3 +24,5 @@ export const Page404 = () => {
 		</Fragment>
 	);
 };
+
+export default NotFound;

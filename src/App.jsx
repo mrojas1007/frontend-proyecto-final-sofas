@@ -1,20 +1,18 @@
 import './App.css';
+import { ProductsProvider } from './context/ProductsProvider';
 import { AuthProvider } from './context/AuthProvider';
-import { RouterManager } from './router/RouterManager';
 import { CartProvider } from './context/CartProvider';
-import { ProductProvider } from './context/ProductProvider';
+import RouterManager from './router/RouterManager';
 
 function App() {
 	return (
-		<>
-			<AuthProvider>
+		<AuthProvider>
+			<ProductsProvider>
 				<CartProvider>
-					<ProductProvider>
-						<RouterManager />
-					</ProductProvider>
+					<RouterManager />
 				</CartProvider>
-			</AuthProvider>
-		</>
+			</ProductsProvider>
+		</AuthProvider>
 	);
 }
 

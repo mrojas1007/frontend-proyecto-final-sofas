@@ -1,30 +1,24 @@
-import { useAuth } from '../hooks/useAuth';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { MainLayout } from '../layouts/MainLayout';
-import { AuthGuard } from '../guard/AuthGuard';
-import { AdminLayout } from '../layouts/AdminLayout';
-import { Page404 } from '../pages/Page404';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
-import { HomePage } from '../pages/HomePage';
-import { LoginPage } from '../pages/LoginPage';
-import { ProfilePage } from '../pages/ProfilePage';
-import { DashboardPage } from '../pages/DashboardPage';
-import { RegisterPage } from '../pages/RegisterPage';
-import { SuccessPage } from '../pages/SuccessPage';
-import { ROLES } from '../helpers/roles';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NotFound from '../pages/NotFound';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+import ProfilePage from '../pages/ProfilePage';
+import MainLayout from '../layouts/MainLayout';
+import AuthGuard from '../guard/AuthGuard';
+import useAuth from '../hooks/useAuth';
+import AdminLayout from '../layouts/AdminLayout';
 
-export const RouterManager = () => {
+const RouterManager = () => {
 	const { session } = useAuth();
-	console.log(session, 'User session');
-	console.log(!session?.token, 'condicion');
-
+	console.log(session);
 	return (
 		<Router>
 			<Routes>
 				<Route
 					path="*"
-					element={<Page404 />}
+					element={<NotFound />}
 				/>
 				<Route
 					path="/login"
@@ -34,7 +28,6 @@ export const RouterManager = () => {
 					path="/register"
 					element={<RegisterPage />}
 				/>
-
 				<Route
 					path="/"
 					element={<MainLayout />}
@@ -45,26 +38,11 @@ export const RouterManager = () => {
 					/>
 
 					<Route
-						path="/cart"
-						element={<CartPage />}
-					/>
-
-					<Route
-						path="/checkout"
-						element={<CheckoutPage />}
-					/>
-
-					<Route
-						path="/success"
-						element={<SuccessPage />}
-					/>
-
-					<Route
 						path="/profile"
 						element={
 							<AuthGuard
+								isAllow={session?.user.token}
 								redirectTo="/login"
-								isAllow={session?.token}
 							/>
 						}
 					>
@@ -79,8 +57,8 @@ export const RouterManager = () => {
 					path="/admin"
 					element={
 						<AuthGuard
+							isAllow={session?.user.roles.includes('admin')}
 							redirectTo="/profile"
-							isAllow={session?.role == ROLES.ADMIN}
 						>
 							<AdminLayout />
 						</AuthGuard>
@@ -88,15 +66,20 @@ export const RouterManager = () => {
 				>
 					<Route
 						index
-						element={<DashboardPage />}
+						element={<p>Admin Dashboard</p>}
 					/>
-
 					<Route
 						path="/admin/products"
-						element={<p>Admin Products</p>}
+						element={<p>Admin List products</p>}
+					/>
+					<Route
+						path="/admin/users"
+						element={<p>Admin List users</p>}
 					/>
 				</Route>
 			</Routes>
 		</Router>
 	);
 };
+
+export default RouterManager;

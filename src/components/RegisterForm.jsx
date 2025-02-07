@@ -1,73 +1,9 @@
-import { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
-export const RegisterForm = () => {
-	// const navigate = useNavigate();
-	// const { handleSession } = useAuth();
-	// const [loading, setLoading] = useState(false);
-
-	// const [register, setRegister] = useState({
-	// 	username: '',
-	// 	email: '',
-	// 	password: '',
-	// });
-
-	// const handleSumbit = async (event) => {
-	// 	event.preventDefault();
-
-	// 	const newUser = await fetch(`${VITE_API_URL}/api/auth/register`, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(register),
-	// 	});
-
-	// 	const response = await newUser.json();
-
-	// 	handleSession(response);
-	// 	navigate('/login');
-	// };
-
-	// const handleOnChange = (event) => {
-	// 	const { name, value } = event.target;
-
-	// 	setRegister({
-	// 		...register,
-	// 		[name]: value,
-	// 	});
-	// };
-	const { handleSession } = useAuth();
-
-	const [user, setUser] = useState({
-		token: 'token user secret',
-		role: 'admin',
-		username: '',
-		email: '',
-		password: '',
-	});
-
-	const handleOnChange = (event) => {
-		const { name, value } = event.target;
-		setUser({
-			...user,
-			[name]: value,
-		});
-	};
-
-	const navigate = useNavigate();
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		handleSession(user);
-
-		navigate('/admin');
-	};
-
+const RegisterForm = () => {
 	return (
 		<form
-			onSubmit={handleSubmit}
+			onSubmit={'handleSumbit'}
 			className="space-y-4"
 		>
 			<div>
@@ -78,7 +14,7 @@ export const RegisterForm = () => {
 					Username
 				</label>
 				<input
-					onChange={handleOnChange}
+					onChange={'handleOnChange'}
 					type="text"
 					id="username"
 					name="username"
@@ -93,7 +29,7 @@ export const RegisterForm = () => {
 					Email
 				</label>
 				<input
-					onChange={handleOnChange}
+					onChange={'handleOnChange'}
 					type="text"
 					id="email"
 					name="email"
@@ -108,7 +44,7 @@ export const RegisterForm = () => {
 					Password
 				</label>
 				<input
-					onChange={handleOnChange}
+					onChange={'handleOnChange'}
 					type="password"
 					id="password"
 					name="password"
@@ -118,7 +54,7 @@ export const RegisterForm = () => {
 			<div>
 				<button
 					type="submit"
-					className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+					className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
 				>
 					Sign Up
 				</button>
@@ -126,3 +62,5 @@ export const RegisterForm = () => {
 		</form>
 	);
 };
+
+export default RegisterForm;

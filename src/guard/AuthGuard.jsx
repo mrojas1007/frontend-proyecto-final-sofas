@@ -1,11 +1,13 @@
-import { useAuth } from '../hooks/useAuth';
+import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import CustomLoading from '../components/CustomLoading';
 
-export const AuthGuard = ({ children, isAllow, redirectTo = '/login' }) => {
-	const { isLoading } = useAuth();
+const AuthGuard = ({ children, isAllow, redirectTo = '/' }) => {
+	const { loading } = useAuth();
 
-	if (isLoading) {
-		return <div>Loading...</div>;
+	if (loading) {
+		return <CustomLoading />;
 	}
 
 	if (!isAllow) {
@@ -19,3 +21,5 @@ export const AuthGuard = ({ children, isAllow, redirectTo = '/login' }) => {
 
 	return children ? children : <Outlet />;
 };
+
+export default AuthGuard;

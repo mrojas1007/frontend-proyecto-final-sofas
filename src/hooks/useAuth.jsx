@@ -1,12 +1,16 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 
-export const useAuth = () => {
-	const { session, isLoading, handleSession } = useContext(AuthContext);
+const useAuth = () => {
+	const { loading, session, handleSession, handleLogout } =
+		useContext(AuthContext);
 
 	return {
+		loading,
 		session,
-		isLoading,
 		handleSession,
+		handleLogout,
 	};
 };
+
+export default useAuth;

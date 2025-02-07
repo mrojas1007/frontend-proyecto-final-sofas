@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
-import { useStorage } from '../hooks/useStorage';
+import React, { createContext, useEffect, useState } from 'react';
+import useStorage from '../hooks/useStorage';
 
 export const AuthContext = createContext();
 
@@ -7,17 +7,22 @@ export const AuthProvider = ({ children }) => {
 	const { handleSetStorageSession, handleGetStorageSession, decrypted } =
 		useStorage();
 
+	const [loading, setLoading] = useState(true);
 	const [session, setSession] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
 
 	const handleSession = (session) => {
 		setSession(session);
-		// handleSetStorageSession(session);
+		handleSetStorageSession(session);
+	};
+
+	const handleLogout = () => {
+		setSession(null);
+		localStorage.removeItem('USER_SESSION');
 	};
 
 	useEffect(() => {
 		handleGetStorageSession();
-	}, [handleGetStorageSession]);
+	}, []);
 
 	useEffect(() => {
 		if (decrypted) {
@@ -25,12 +30,14 @@ export const AuthProvider = ({ children }) => {
 		}
 
 		setTimeout(() => {
-			setIsLoading(false);
+			setLoading(false);
 		}, 1);
 	}, [decrypted]);
 
 	return (
-		<AuthContext.Provider value={{ session, isLoading, handleSession }}>
+		<AuthContext.Provider
+			value={{ loading, session, handleSession, handleLogout }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

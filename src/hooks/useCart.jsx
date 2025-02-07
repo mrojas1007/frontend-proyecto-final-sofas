@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { CartContext } from '../context/CartProvider';
 
-export const useAuth = () => {
+const useCart = () => {
 	const { cart } = useContext(CartContext);
 
 	return {
 		cart,
 	};
 };
+
+export default useCart;

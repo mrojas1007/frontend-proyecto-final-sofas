@@ -1,18 +1,18 @@
+import React, { useState } from 'react';
+import { Layout, Menu, theme, Button } from 'antd';
+import { Outlet } from 'react-router-dom';
 import {
+	MenuFoldOutlined,
+	MenuUnfoldOutlined,
+	UploadOutlined,
 	UserOutlined,
 	VideoCameraOutlined,
-	UploadOutlined,
-	MenuUnfoldOutlined,
-	MenuFoldOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content, Sider } = Layout;
 
-export const AdminLayout = () => {
-	const [collapsed, setCollapsed] = useState(false);
+const AdminLayout = () => {
+	const [collapsed, setCollapsed] = useState(true);
 
 	const {
 		token: { colorBgContainer, borderRadiusLG },
@@ -82,3 +82,5 @@ export const AdminLayout = () => {
 		</Layout>
 	);
 };
+
+export default AdminLayout;

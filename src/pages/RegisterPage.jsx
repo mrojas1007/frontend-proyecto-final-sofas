@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { RegisterForm } from '../components/RegisterForm';
 import { Link } from 'react-router-dom';
+import RegisterForm from '../components/RegisterForm';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
 	return (
 		<Fragment>
 			<div className="flex h-screen">
@@ -265,6 +265,9 @@ export const RegisterPage = () => {
 
 				<div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
 					<div className="max-w-md w-full p-6">
+						<Link to="/">
+							<h1>Home page</h1>
+						</Link>
 						<h1 className="text-3xl font-semibold mb-6 text-black text-center">
 							Sign Up
 						</h1>
@@ -310,3 +313,5 @@ export const RegisterPage = () => {
 		</Fragment>
 	);
 };
+
+export default RegisterPage;
