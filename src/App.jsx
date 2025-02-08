@@ -1,33 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import MainContext from './context/MainContext'
+import { BrowserRouter } from 'react-router-dom'
+import useUser from './hooks/useUser'
 
 function App() {
-  const [count, setCount] = useState(0)
+	const globalState = useUser();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+	  <MainContext.Provider value={globalState}>
+		<BrowserRouter>
+		<Navbar/>
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/register" element={<Register />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/profile" element={<Profile />} />
+			<Route path="/create" element={<CreatePost />} />
+			<Route path="/products" element={<Products />} />
+			<Route path="/product/:id" element={<Product />} />
+			<Route path="*" element={<NotFound />} />
+		</Routes>
+		</BrowserRouter>
+	  </MainContext.Provider>
     </>
   )
 }
