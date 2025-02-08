@@ -27,7 +27,7 @@ const AdminLayout = () => {
 			>
 				<div className="demo-logo-vertical" />
 				<Menu
-					theme="dark"
+					theme="V4 Theme"
 					mode="inline"
 					defaultSelectedKeys={['1']}
 					items={[
