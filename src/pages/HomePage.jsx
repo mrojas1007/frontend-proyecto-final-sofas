@@ -6,7 +6,9 @@ const HomePage = () => {
 
 	console.log(products, 'Products home');
 
-	return <div>Hola</div>;
+	return <h1>EL UNICO MARKETPLACE DE SOFAS EN CHILE</h1>;
+		
 };
+
 
 export default HomePage;
