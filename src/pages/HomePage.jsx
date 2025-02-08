@@ -2,7 +2,7 @@ import React from 'react';
 import useProduct from '../hooks/useProduct';
 
 const HomePage = () => {
-	const { products, loading } = useProduct();
+	const { products } = useProduct();
 
 	console.log(products, 'Products home');
 

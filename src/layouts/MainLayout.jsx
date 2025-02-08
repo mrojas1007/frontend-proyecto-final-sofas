@@ -6,13 +6,13 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const MainLayout = () => {
 	const items1 = [
-		{ label: <Link to="/login">Login</Link>, key: 'login' },
-		{ label: <Link to="/register">Register</Link>, key: 'register' },
-		{ label: <Link to="/profile">Profile</Link>, key: 'profile' },
+		{ label: <Link to="/login"><button>Iniciar sesión</button></Link>, key: 'login' },
+		{ label: <Link to="/register">Registrarse</Link>, key: 'register' },
+		{ label: <Link to="/profile">Mi perfil</Link>, key: 'profile' },
 	];
 
 	const items = [
-		{ title: <Link to="/">Home</Link> },
+		{ title: <Link to="/">Inicio</Link> },
 		{ title: <Link to="/list">List</Link> },
 		{ title: <Link to="/app">App</Link> },
 	];
@@ -35,13 +35,14 @@ const MainLayout = () => {
 				style={{
 					display: 'flex',
 					alignItems: 'center',
+					background: '#0082fd',
 					justifyContent: 'space-between', // Alinea elementos en extremos
 				}}
 			>
 				<div style={logoStyle}>
 					{/* Reemplaza esto con tu logo */}
 					<img
-						src="/logo.png"
+						src="/public/sofa-svgrepo-com.svg"
 						alt="Logo"
 						style={{ height: 40 }}
 					/>
@@ -71,7 +72,7 @@ const MainLayout = () => {
 				<Layout
 					style={{
 						padding: '24px 0',
-						background: '#f0f2f5', // Cambia esto por el color que prefieras
+						background: '#0082fd', // Cambia esto por el color que prefieras
 					}}
 				>
 					<Sider
@@ -104,33 +105,33 @@ const MainLayout = () => {
 			<Footer
 				style={{
 					textAlign: 'center',
-					backgroundColor: '#001529', // Cambia el color del fondo del footer
+					backgroundColor: '#0082fd', // Cambia el color del fondo del footer
 					color: 'white', // Color del texto
 					padding: '24px 0', // Añadir padding para un mejor espaciado
 					fontSize: '14px', // Ajustar tamaño de fuente
 				}}
 			>
 				<div style={{ marginBottom: '8px' }}>
-					Ant Design ©{new Date().getFullYear()} Created by Ant UED
+					Sofapp ©{new Date().getFullYear()} Creado para Desafío Latam
 				</div>
 				<div>
 					<a
 						href="/"
 						style={{ color: 'white', marginRight: '15px' }}
 					>
-						Home
+						Inicio
 					</a>
 					<a
 						href="/"
 						style={{ color: 'white', marginRight: '15px' }}
 					>
-						About Us
+						Acerca de nosotros
 					</a>
 					<a
 						href="/"
 						style={{ color: 'white' }}
 					>
-						Contact
+						Contacto
 					</a>
 				</div>
 			</Footer>
