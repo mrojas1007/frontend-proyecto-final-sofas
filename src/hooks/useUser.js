@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const userUser = () => {
+const useUser = () => {
     const [user, setUser] = useState(null);
 
     const login = (user) => {
@@ -13,3 +13,5 @@ const userUser = () => {
 
     return { user, login, logout };
 }
+
+export default useUser;
