@@ -62,8 +62,6 @@ const Products = () => {
                     <Col>
                         <ProductCard />
                     </Col>
-                </Row>
-                <Row>
                     <Col>
                         <ProductCard />
                     </Col>

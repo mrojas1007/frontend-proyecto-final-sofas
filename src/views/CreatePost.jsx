@@ -45,8 +45,8 @@ const CreatePost = () => {
 
     return (
         <Container>
-            <h1>Formulario de publicación</h1>
-            <Form onSubmit={handleSubmit} className='col-10 col-md-6 mx-auto p-3 border border-dark rounded my-5'>
+            <h1 className='text-center'>Formulario de publicación</h1>
+            <Form onSubmit={handleSubmit} className='col-10 col-md-6 mx-auto p-3 border border-dark rounded mt-3 mb-5'>
                 <Form.Group className="mb-3" controlId="formName">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
