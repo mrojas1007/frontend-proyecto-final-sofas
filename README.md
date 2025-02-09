@@ -1,5 +1,5 @@
 HITO 2: Frontend
 
 Integrantes:
--Cristian Gutierrez
+- Cristian Gutierrez
 - Marcela Rojas
