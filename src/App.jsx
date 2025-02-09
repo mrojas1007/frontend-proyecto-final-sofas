@@ -11,8 +11,7 @@ import Login from './views/Login'
 import Register from './views/Register'
 import Profile from './views/Profile'
 import CreatePost from './views/CreatePost'
-
-
+import Products from './views/Products'
 
 function App() {
 	const globalState = useUser();
@@ -28,7 +27,7 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/create" element={<CreatePost />} />
-						{/* <Route path="/products" element={<Products />} /> */}
+						<Route path="/products" element={<Products />} />
 						{/* <Route path="/product/:id" element={<Product />} /> */}
 						{/* <Route path="*" element={<NotFound />} /> */}
 					</Routes>

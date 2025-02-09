@@ -23,8 +23,8 @@ function CustomNavbar() {
           </Nav>
           <Nav>
             <Nav.Link href="register" className='d-flex align-items-center'>Registro</Nav.Link>
-            <Button variant="secondary">
-              <Nav.Link eventKey={2} href="login" className='text-light'>
+            <Button variant="warning">
+              <Nav.Link eventKey={2} href="login">
                 Iniciar sesión
               </Nav.Link>
             </Button>
