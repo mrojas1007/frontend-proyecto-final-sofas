@@ -7,10 +7,11 @@ const Footer = () => {
             <div className="container text-center text-md-left">
                 <div className="row">
                     <div className="col-md-4">
-                        <img src="path/to/logo.png" alt="Logo" className="mb-3" />
+                        <img src="src/assets/sofapp-logo.svg" alt="Logo" width="50"
+          height="50" className="mb-3" />
                     </div>
                     <div className="col-md-4">
-                        <h5 className="text-uppercase">Follow Us</h5>
+                        <h5 className="text-uppercase">¡Visita nuestras redes sociales!</h5>
                         <ul className="list-unstyled">
                             <li>
                                 <a href="https://facebook.com" className="text-white">Facebook</a>
@@ -24,8 +25,8 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md-4">
-                        <h5 className="text-uppercase">© 2025 Your Company</h5>
-                        <p>All rights reserved.</p>
+                        <h5 className="text-uppercase">© 2025</h5>
+                        <p>Todos los derechos reservados</p>
                     </div>
                 </div>
             </div>
