@@ -5,7 +5,14 @@ import useUser from './hooks/useUser'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import CustomNavbar from './components/Navbar'
+import Footer from './components/Footer';
 import Home from './views/Home'
+import Login from './views/Login'
+import Register from './views/Register'
+import Profile from './views/Profile'
+import CreatePost from './views/CreatePost'
+
+
 
 function App() {
 	const globalState = useUser();
@@ -17,15 +24,16 @@ function App() {
 					<CustomNavbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						{/* <Route path="/register" element={<Register />} />
+						<Route path="/register" element={<Register />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/create" element={<CreatePost />} />
-						<Route path="/products" element={<Products />} />
-						<Route path="/product/:id" element={<Product />} />
-						<Route path="*" element={<NotFound />} /> */}
+						{/* <Route path="/products" element={<Products />} /> */}
+						{/* <Route path="/product/:id" element={<Product />} /> */}
+						{/* <Route path="*" element={<NotFound />} /> */}
 					</Routes>
 				</BrowserRouter>
+				<Footer />
 			</MainContext.Provider>
 		</>
 	)
