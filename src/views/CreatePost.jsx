@@ -103,6 +103,8 @@ const CreatePost = () => {
                                 <option value="1 cuerpo">1 cuerpo</option>
                                 <option value="2 cuerpos">2 cuerpos</option>
                                 <option value="3 cuerpos">3 cuerpos</option>
+                                <option value="4 cuerpos">4 cuerpos</option>
+                                <option value="5 cuerpos">5 cuerpos</option>
                             </Form.Control>
                         </Form.Group>
                     </Col>
