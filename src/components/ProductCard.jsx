@@ -39,6 +39,10 @@ const ProductCard = ({ producto, onClick }) => {
                                     <Col className='text-center align-self-center'>
                                         ${producto.precio}
                                     </Col>
+
+                                    <Col className='text-center align-self-center'>
+                                        stock :{producto.stock}
+                                    </Col>
                                     <Col>
                                     <Button 
                         variant="warning" 

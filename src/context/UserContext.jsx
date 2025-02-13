@@ -59,15 +59,37 @@ export const UserProvider = ({ children }) => {
 
   const fetchProductosByMarca = async (marca) => {
     try {
-      const response = await fetch(
-        `http://localhost:2000/producto/marca/${marca}`
-      );
+      const response = await fetch(`http://localhost:2000/producto/marca/${marca}`);
+      if (!response.ok) throw new Error("Error al obtener productos por marca");
       return await response.json();
     } catch (error) {
-      console.error("Error al obtener productos por marca:", error);
+      console.error("Error al obtener productos por marca:", error.message);
+      return [];
     }
   };
-
+  
+  const fetchProductosByTipo = async (tipo) => {
+    try {
+      const response = await fetch(`http://localhost:2000/producto/tipo/${tipo}`);
+      if (!response.ok) throw new Error("Error al obtener productos por tipo");
+      return await response.json();
+    } catch (error) {
+      console.error("Error al obtener productos por tipo:", error.message);
+      return [];
+    }
+  };
+  
+  const fetchProductosByCuerpo = async (cuerpo) => {
+    try {
+      const response = await fetch(`http://localhost:2000/producto/cuerpo/${cuerpo}`);
+      if (!response.ok) throw new Error("Error al obtener productos por cuerpo");
+      return await response.json();
+    } catch (error) {
+      console.error("Error al obtener productos por cuerpo:", error.message);
+      return [];
+    }
+  };
+  
   const fetchObtenerProductosUsuario = async (id_usuario) => {
     try {
       const response = await fetch(
@@ -179,6 +201,8 @@ export const UserProvider = ({ children }) => {
         fetchProductos,   
         fetchProductoById,
         fetchProductosByMarca,
+        fetchProductosByTipo,
+        fetchProductosByCuerpo,
         fetchCrearProducto,
         fetchAgregarUsuario,
         fetchLoginUsuario,
