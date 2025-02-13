@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
+  const { nombreUsuario, apellidoUsuario, emailUsuario, passUsuario, fonoUsuario } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    fono:"",
     password: "",
   });
+
+  useEffect(() => {
+    setFormData({
+      firstName: nombreUsuario,
+      lastName: apellidoUsuario,
+      email: emailUsuario,
+      password: passUsuario,
+      fono: fonoUsuario,
+    });
+  }, [nombreUsuario, apellidoUsuario, emailUsuario, passUsuario, fonoUsuario]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,9 +32,9 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
   };
+
 
   return (
     <Container>
@@ -33,7 +46,6 @@ const Profile = () => {
               <Form.Label>Nombre</Form.Label>
               <Form.Control
                 type="text"
-                // placeholder="Enter first name"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
@@ -44,7 +56,6 @@ const Profile = () => {
               <Form.Label>Apellido</Form.Label>
               <Form.Control
                 type="text"
-                // placeholder="Enter last name"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
@@ -55,9 +66,19 @@ const Profile = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                // placeholder="Enter email"
                 name="email"
                 value={formData.email}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            
+            <Form.Group controlId="formFono">
+              <Form.Label>Telefono</Form.Label>
+              <Form.Control
+                type="fono"
+                name="fono"
+                value={formData.fono}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -66,16 +87,15 @@ const Profile = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                // placeholder="Password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            {/* <Button variant="primary" type="submit">
+              Guardar Cambios
+            </Button> */}
           </Form>
         </Col>
       </Row>
