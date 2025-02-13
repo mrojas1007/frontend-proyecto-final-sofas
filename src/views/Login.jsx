@@ -1,43 +1,27 @@
-import axios from "axios";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ENDPOINT } from "../config/constants";
-import Context from "../context/UserContext";
-
-const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const initialForm = { email: "", password: "123456" };
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(initialForm);
-  const { login } = useContext(Context);
+  const { fetchLoginUsuario } = useContext(UserContext);
+  const [user, setUser] = useState({ email: "", pass: "" });
 
-  const handleUser = (event) =>
+  const handleUser = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+  };
 
-  const handleForm = (event) => {
+  const handleForm = async (event) => {
     event.preventDefault();
 
-    if (!user.email.trim() || !user.password.trim()) {
-      return window.alert("Email y password obligatorias.");
-    }
-
-    if (!emailRegex.test(user.email)) {
-      return window.alert("El formato del email no es correcto!");
-    }
-
-    axios
-      .post(ENDPOINT.login, user)
-      .then(({ data }) => {
-        window.sessionStorage.setItem("token", data.token);
-        window.alert("Usuario identificado con éxito 😀.");
-        login({});
+    try {
+      const token = await fetchLoginUsuario(user.email, user.pass);
+      if (token) {
         navigate("/profile");
-      })
-      .catch(({ response: { data } }) => {
-        console.error(data);
-        window.alert(`${data.message} 🙁.`);
-      });
+      }
+    } catch (error) {
+      window.alert("Error al iniciar sesión. Verifica tus credenciales.");
+    }
   };
 
   return (
@@ -47,7 +31,7 @@ const Login = () => {
     >
       <h1>Iniciar Sesión</h1>
       <hr />
-      <div className="form-group mt-1 ">
+      <div className="form-group mt-1">
         <label>Email</label>
         <input
           value={user.email}
@@ -58,13 +42,13 @@ const Login = () => {
           placeholder="ej. juan.perez@gmail.com"
         />
       </div>
-      <div className="form-group mt-1 ">
+      <div className="form-group mt-1">
         <label>Contraseña</label>
         <input
-          value={user.password}
+          value={user.pass}
           onChange={handleUser}
           type="password"
-          name="password"
+          name="pass"
           className="form-control"
           placeholder="Contraseña"
         />

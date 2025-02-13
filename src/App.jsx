@@ -1,9 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserContext from "./context/UserContext";
-import useUser from "./hooks/useUser";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { UserProvider, UserContext } from "./context/UserContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
 import CustomNavbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./views/Home";
@@ -13,30 +12,43 @@ import Profile from "./views/Profile";
 import CreatePost from "./views/CreatePost";
 import Products from "./views/Products";
 import Product from "./views/Product";
+import ProductCard from "./components/ProductCard";
 
 function App() {
-  const globalState = useUser();
-
   return (
-    <>
-      <UserContext.Provider value={globalState}>
-        <BrowserRouter>
-          <CustomNavbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/create" element={<CreatePost />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/product/:id" element={<Product />} />
-            {/* <Route path="*" element={<NotFound />} /> */}
-          </Routes>
-        </BrowserRouter>
-        <Footer />
-      </UserContext.Provider>
-    </>
+    <UserProvider>
+      <BrowserRouter>
+        <CustomNavbar />
+        <Routes>
+          {/* Rutas públicas */}
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+
+          {/* Rutas protegidas */}
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/CreatePost" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
+          <Route path="/productCard" element={<ProtectedRoute><ProductCard /></ProtectedRoute>} />
+
+          {/* Ruta por defecto */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
+    </UserProvider>
   );
+}
+
+function ProtectedRoute({ children }) {
+  const { token } = useContext(UserContext);
+  return token ? children : <Navigate to="/login" />;
+}
+
+function PublicRoute({ children }) {
+  const { token } = useContext(UserContext);
+  return !token ? children : <Navigate to="/profile" />;
 }
 
 export default App;
