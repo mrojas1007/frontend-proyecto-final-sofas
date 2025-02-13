@@ -13,7 +13,7 @@ const Politics = () => {
             <section className="politics-section">
                 <h3 className="politics-subtitle">Política de Envíos</h3>
                 <p className="politics-text">
-                    Los vendedores son responsables de enviar los productos a los clientes. Los tiempos de entrega pueden variar según la ubicación del vendedor y del cliente, pero generalmente los pedidos se entregan dentro de los 5 a 7 días hábiles.
+                    Los vendedores son responsables de enviar los productos a los clientes. Los tiempos de entrega pueden variar según la ubicación del vendedor y del cliente.
                 </p>
             </section>
             <section className="politics-section">
