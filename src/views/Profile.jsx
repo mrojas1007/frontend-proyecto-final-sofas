@@ -63,7 +63,7 @@ const Profile = () => {
             </Form.Group>
 
             <Form.Group controlId="formPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
                 // placeholder="Password"
