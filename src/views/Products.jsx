@@ -13,7 +13,6 @@ const Products = () => {
   const [cuerpoSeleccionado, setCuerpoSeleccionado] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Cargar todos los productos al entrar a la página
   useEffect(() => {
     const cargarProductos = async () => {
       setLoading(true);
@@ -33,7 +32,7 @@ const Products = () => {
     cargarProductos();
   }, []);
 
-  // ✅ Cargar productos filtrados cuando se selecciona un filtro
+
   useEffect(() => {
     const cargarProductosFiltrados = async () => {
       setLoading(true);
@@ -47,7 +46,7 @@ const Products = () => {
         } else if (cuerpoSeleccionado) {
           data = await fetchProductosByCuerpo(cuerpoSeleccionado);
         } else {
-          // Si no hay filtros seleccionados, carga todos los productos nuevamente
+     
           data = await fetchProductos();
         }
 
@@ -63,7 +62,7 @@ const Products = () => {
       }
     };
 
-    // Solo ejecutamos la búsqueda si hay algún filtro seleccionado
+
     if (marcaSeleccionada || tipoSeleccionado || cuerpoSeleccionado) {
       cargarProductosFiltrados();
     }
@@ -114,11 +113,11 @@ const Products = () => {
                 {cuerpoSeleccionado || "Cuerpo"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item eventKey="1 cuerpo">1 cuerpo</Dropdown.Item>
-                <Dropdown.Item eventKey="2 cuerpos">2 cuerpos</Dropdown.Item>
-                <Dropdown.Item eventKey="3 cuerpos">3 cuerpos</Dropdown.Item>
-                <Dropdown.Item eventKey="4 cuerpos">4 cuerpos</Dropdown.Item>
-                <Dropdown.Item eventKey="5 cuerpos">5 cuerpos</Dropdown.Item>
+                <Dropdown.Item eventKey="1">1 cuerpo</Dropdown.Item>
+                <Dropdown.Item eventKey="2">2 cuerpos</Dropdown.Item>
+                <Dropdown.Item eventKey="3">3 cuerpos</Dropdown.Item>
+                <Dropdown.Item eventKey="4">4 cuerpos</Dropdown.Item>
+                <Dropdown.Item eventKey="5">5 cuerpos</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Stack>
@@ -135,7 +134,7 @@ const Products = () => {
                 <Card.Img variant="top" src={producto.foto} />
                 <Card.Body>
                   <Card.Title>{producto.nombre}</Card.Title>
-                  <Card.Text>{producto.detalle}</Card.Text>
+                  {/* <Card.Text>{producto.detalle}</Card.Text> */}
                 </Card.Body>
                 <Card.Footer>
                   <Row>

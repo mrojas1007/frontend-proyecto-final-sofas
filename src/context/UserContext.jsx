@@ -107,6 +107,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const fetchCrearProducto = async (producto) => {
+    console.log("Enviando producto al backend:", producto);
     try {
       const response = await fetch("http://localhost:2000/producto/agregar", {
         method: "POST",
@@ -194,6 +195,28 @@ export const UserProvider = ({ children }) => {
     setFonoUsuario("");
   };
 
+  const fetchUltimosProductos = async () => {
+    try {
+      const response = await fetch("http://localhost:2000/producto/cincoultimos");
+      return await response.json();
+    } catch (error) {
+      console.error("Error al obtener los últimos 5 productos:", error);
+      return [];
+    }
+  }; 
+  const fetchDatosUsuarioPorProducto = async (id_producto) => {
+    try {
+      const response = await fetch(`http://localhost:2000/usuario/producto/${id_producto}`);
+      if (!response.ok) {
+        throw new Error("Error al obtener los datos del usuario.");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -217,6 +240,8 @@ export const UserProvider = ({ children }) => {
         id_usuario,
         setIdUsuario,
         fetchObtenerProductosUsuario,
+        fetchUltimosProductos,
+        fetchDatosUsuarioPorProducto,
       }}
     >
       {children}
