@@ -28,6 +28,8 @@ function CustomNavbar() {
         <Nav className="me-auto">
           <Nav.Link href="/">Inicio</Nav.Link>
           <Nav.Link href="/products">Productos</Nav.Link>
+          <Nav.Link href="/politics">Políticas</Nav.Link>
+
         </Nav>
         <Nav>
           {!token ? (
