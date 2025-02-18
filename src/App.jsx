@@ -15,13 +15,14 @@ import Product from "./views/Product";
 import ProductCard from "./components/ProductCard";
 import Politics from "./views/Politics";
 
+
 function App() {
   return (
     <UserProvider>
       <BrowserRouter>
         <CustomNavbar />
         <Routes>
-          /* Rutas públicas */}
+     
                 <Route path="/" element={<Home />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/product/:id" element={<Product />} />

@@ -1,0 +1,36 @@
+.ContainerProducts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .product-image {
+    width: 280px !important;
+    height: 286px !important;
+
+  }  
+
+  .LaCard {
+    width: 300px !important;
+    /* width: 18rem; */
+    margin-bottom: 20px;
+  }
+
+  .LaCard .card-body {
+    height: 78px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .LaCard .card-title {
+    height: 48px !important;
+    text-align: center !important;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+  }
+
