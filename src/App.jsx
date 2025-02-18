@@ -13,6 +13,7 @@ import CreatePost from "./views/CreatePost";
 import Products from "./views/Products";
 import Product from "./views/Product";
 import ProductCard from "./components/ProductCard";
+import Politics from "./views/Politics";
 
 function App() {
   return (
@@ -20,14 +21,15 @@ function App() {
       <BrowserRouter>
         <CustomNavbar />
         <Routes>
-          {/* Rutas públicas */}
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          /* Rutas públicas */}
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+                <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+                <Route path="/politics" element={<Politics />} />
 
-          {/* Rutas protegidas */}
+                {/* Rutas protegidas */}
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/CreatePost" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
           <Route path="/productCard" element={<ProtectedRoute><ProductCard /></ProtectedRoute>} />
