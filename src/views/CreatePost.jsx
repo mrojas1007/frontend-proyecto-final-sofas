@@ -8,8 +8,6 @@ const CreatePost = () => {
   const [nombre, setNombre] = useState("");
   const [warning, setWarning] = useState("");
 
-  console.log("ID del usuario en CreatePost:", id_usuario);
-
   const [formData, setFormData] = useState({
     name: "",
     color: "",
@@ -43,7 +41,7 @@ const CreatePost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+console.log(formData)
     if (
       !formData.name ||
       !formData.color ||
@@ -146,7 +144,14 @@ const CreatePost = () => {
   const [mostrarColores, setMostrarColores] = useState(false);
 
   const handleColorClick = (color) => {
-    setColorSeleccionado(color);
+    console.log("Color seleccionado:", color);
+    setColorSeleccionado(color);  
+
+    setFormData((prevData) => ({
+      ...prevData,
+      color: color.nombre,
+    }));
+
     setMostrarColores(false);
   };
 
@@ -232,8 +237,9 @@ const CreatePost = () => {
                 {/* Campo de texto con el nombre del color seleccionado */}
                 <Form.Control
                   type="text"
-                  value={colorSeleccionado.nombre}
-                  readOnly
+                    name="color"
+                    value={formData.color}
+                    readOnly            
                   style={{ marginTop: "10px" }}
                 />
               </div>
