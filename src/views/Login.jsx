@@ -6,6 +6,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { fetchLoginUsuario } = useContext(UserContext);
   const [user, setUser] = useState({ email: "", pass: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleUser = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -42,17 +43,42 @@ const Login = () => {
           placeholder="ej. juan.perez@gmail.com"
         />
       </div>
-      <div className="form-group mt-1">
+
+      <div className="form-group mt-1 position-relative">
         <label>Contraseña</label>
-        <input
-          value={user.pass}
-          onChange={handleUser}
-          type="password"
-          name="pass"
-          className="form-control"
-          placeholder="Contraseña"
-        />
+        <div className="input-group">
+          <input
+            value={user.pass}
+            onChange={handleUser}
+            type={showPassword ? "text" : "password"}
+            name="pass"
+            className="form-control"
+            placeholder="Contraseña"
+          />
+          <button
+            type="button"
+            className="btn"
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              border: "none",
+              background: "black",
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              padding: "5px",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            <i
+              className={`fa-solid ${showPassword ? "fa-eye" : "fa-eye-slash"}`}
+              style={{ color: "white", fontSize: "18px" }}
+            ></i>
+          </button>
+        </div>
       </div>
+
       <div className="d-flex justify-content-center">
         <button type="submit" className="btn btn-dark mt-3">
           Iniciar Sesión

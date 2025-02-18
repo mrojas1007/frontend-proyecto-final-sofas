@@ -33,8 +33,8 @@ const CreatePost = () => {
       [name]: value,
     });
 
-    if (value.length > 50) {
-      setWarning("⚠️ Máximo 50 caracteres permitidos");
+    if (value.length > 45) {
+      setWarning("⚠️ Máximo 45 caracteres permitidos");
     } else {
       setWarning("");
       setNombre(value);

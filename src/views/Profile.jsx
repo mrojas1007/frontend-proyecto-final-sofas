@@ -1,16 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
-  const { nombreUsuario, apellidoUsuario, emailUsuario, passUsuario, fonoUsuario } = useContext(UserContext);
+  const {
+    nombreUsuario,
+    apellidoUsuario,
+    emailUsuario,
+    passUsuario,
+    fonoUsuario,
+  } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    fono:"",
+    fono: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false); // Estado para alternar la visibilidad de la contraseña
 
   useEffect(() => {
     setFormData({
@@ -34,7 +41,6 @@ const Profile = () => {
     e.preventDefault();
     console.log(formData);
   };
-
 
   return (
     <Container>
@@ -72,11 +78,10 @@ const Profile = () => {
               />
             </Form.Group>
 
-            
             <Form.Group controlId="formFono">
-              <Form.Label>Telefono</Form.Label>
+              <Form.Label>Teléfono</Form.Label>
               <Form.Control
-                type="fono"
+                type="text"
                 name="fono"
                 value={formData.fono}
                 onChange={handleChange}
@@ -85,12 +90,29 @@ const Profile = () => {
 
             <Form.Group controlId="formPassword">
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    backgroundColor: "black",
+                    color: "white",
+                    border: "none",
+                  }}
+                >
+                  <i
+                    className={`fa-solid ${
+                      showPassword ? "fa-eye" : "fa-eye-slash"
+                    }`}
+                  ></i>
+                </Button>
+              </InputGroup>
             </Form.Group>
 
             {/* <Button variant="primary" type="submit">
