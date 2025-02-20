@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
 import whatsappIcon from "../assets/whatsapp-line.svg";
+import { formatPrice } from "../helpers/helpers";
 
 
 const Product = () => {
@@ -73,7 +74,7 @@ const Product = () => {
                       <strong>Alto:</strong> {producto.alto} cm
                     </Card.Text>
                     <Card.Text className="product-price">
-                      <strong>Precio:</strong> ${producto.precio}
+                      <strong>Precio:</strong> {formatPrice(producto.precio)} 
                     </Card.Text>
                     <Card.Text>
                       <strong>Stock:</strong> {producto.stock}
