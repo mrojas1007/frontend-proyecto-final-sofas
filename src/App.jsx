@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import CustomNavbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import MySpinner from './components/Spinner';
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
@@ -21,6 +22,7 @@ function App() {
     <UserProvider>
       <BrowserRouter>
         <CustomNavbar />
+        <MySpinner />
         <Routes>
      
                 <Route path="/" element={<Home />} />
@@ -39,7 +41,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
-      <div style={{minHeight: "80vh"}}></div>
+      <div style={{minHeight: "40vh"}}></div>
       <Footer />
     </UserProvider>
   );

@@ -1,33 +1,30 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
+import jwtDecode from "jwt-decode";
 
 const Profile = () => {
   const {
-    nombreUsuario,
-    apellidoUsuario,
-    emailUsuario,
-    passUsuario,
-    fonoUsuario,
+    token
   } = useContext(UserContext);
+
+  const decodedToken = jwtDecode(token);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     fono: "",
-    password: "",
   });
-  const [showPassword, setShowPassword] = useState(false); // Estado para alternar la visibilidad de la contraseña
 
   useEffect(() => {
     setFormData({
-      firstName: nombreUsuario,
-      lastName: apellidoUsuario,
-      email: emailUsuario,
-      password: passUsuario,
-      fono: fonoUsuario,
+      firstName: decodedToken.nombre,
+      lastName: decodedToken.apellido,
+      email: decodedToken.email,
+      fono: decodedToken.fono,
     });
-  }, [nombreUsuario, apellidoUsuario, emailUsuario, passUsuario, fonoUsuario]);
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +52,7 @@ const Profile = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
+                disabled
               />
             </Form.Group>
 
@@ -65,6 +63,7 @@ const Profile = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
+                disabled
               />
             </Form.Group>
 
@@ -75,6 +74,7 @@ const Profile = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                disabled
               />
             </Form.Group>
 
@@ -85,34 +85,8 @@ const Profile = () => {
                 name="fono"
                 value={formData.fono}
                 onChange={handleChange}
+                disabled
               />
-            </Form.Group>
-
-            <Form.Group controlId="formPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <InputGroup>
-                <Form.Control
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <Button
-                  variant="outline-secondary"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{
-                    backgroundColor: "black",
-                    color: "white",
-                    border: "none",
-                  }}
-                >
-                  <i
-                    className={`fa-solid ${
-                      showPassword ? "fa-eye" : "fa-eye-slash"
-                    }`}
-                  ></i>
-                </Button>
-              </InputGroup>
             </Form.Group>
 
             {/* <Button variant="primary" type="submit">

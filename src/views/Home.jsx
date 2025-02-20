@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <Stack className="p-3">
-  <Stack direction="horizontal" className="align-items-start justify-content-between">
+      <Stack direction="horizontal" className="align-items-start justify-content-between">
         <div className="ContenedorH1">
           <h1 className="text-uppercase text-center" >
             El único marketplace de sofás en Chile
@@ -63,7 +63,7 @@ const Home = () => {
                   <Image src={producto.foto} fluid className="w-50" />
                 </div>
                 <Carousel.Caption>
-                  {/* <h5>{producto.nombre}</h5>             */}
+                  <h5>{producto.nombre}</h5>            
                 </Carousel.Caption>
               </Carousel.Item>
             ))

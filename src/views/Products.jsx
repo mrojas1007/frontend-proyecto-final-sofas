@@ -40,7 +40,7 @@ const Products = () => {
     <Container className="mt-5 mb-5">
       <h1 className="text-center">Productos disponibles</h1>
       <p className="text-center">
-        Encuentra miles de productos y filtra por marcas, tipos y cantidad de cuerpos, para mayor comodidad.
+        Encuentra el sofá que buscas y haz clic en "Ver Detalles" para más información.
       </p>
       <Row className="mb-3">
         {productos.length === 0 ? (

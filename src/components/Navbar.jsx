@@ -5,9 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
+import jwtDecode from "jwt-decode";
 
 function CustomNavbar() {
-  const { token, nombreUsuario, cerrarSesion } = useContext(UserContext);
+  const { token, cerrarSesion } = useContext(UserContext);
+  const decodedToken = token ? jwtDecode(token) : null;
+  const nombreUsuario = decodedToken ? decodedToken.nombre : null;
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
     <Container>

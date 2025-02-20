@@ -1,23 +1,13 @@
 import { createContext, useState, useEffect } from "react";
+//create context
 import axios from "axios";
+import { ENDPOINT } from "../config/constants";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [productos, setProductos] = useState([]);
   const [id_usuario, setIdUsuario] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [nombreUsuario, setNombreUsuario] = useState(localStorage.getItem("nombreUsuario") || "");
-  const [apellidoUsuario, setApellidoUsuario] = useState(localStorage.getItem("apellidoUsuario") || "");
-  const [emailUsuario, setEmailUsuario] = useState(localStorage.getItem("emailUsuario") || "");
-  const [passUsuario, setPassUsuario] = useState(localStorage.getItem("passUsuario") || "");  
-  const [fonoUsuario, setFonoUsuario] = useState(localStorage.getItem("fonoUsuario") || ""); 
-
-  // useEffect(() => {
-  //   const storedUserId = localStorage.getItem("id_usuario");
-  //   if (storedUserId) {
-  //     setIdUsuario(storedUserId);
-  //   }
-  // }, []);
 
   useEffect(() => {
     setIdUsuario(localStorage.getItem("id_usuario") || "");
@@ -25,7 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch("http://localhost:2000/producto/todos");
+      const response = await fetch(ENDPOINT.products + "/todos");
       if (!response.ok) throw new Error("Error al obtener productos");
 
       const data = await response.json();
@@ -33,10 +23,10 @@ export const UserProvider = ({ children }) => {
       if (!Array.isArray(data)) throw new Error("La respuesta no es un array válido");
 
       setProductos(data);
-      return data; 
+      return data;
     } catch (error) {
       console.error("Error al obtener productos:", error);
-      return []; 
+      return [];
     }
   };
 
@@ -46,7 +36,8 @@ export const UserProvider = ({ children }) => {
       if (isNaN(productoId)) throw new Error("ID de producto inválido");
 
       const response = await fetch(
-        `http://localhost:2000/producto/${productoId}`
+        ENDPOINT.products +
+        `/${productoId}`
       );
       if (!response.ok) throw new Error("No se encontró el producto");
 
@@ -59,7 +50,9 @@ export const UserProvider = ({ children }) => {
 
   const fetchProductosByMarca = async (marca) => {
     try {
-      const response = await fetch(`http://localhost:2000/producto/marca/${marca}`);
+      const response = await fetch(
+        ENDPOINT.products +
+        `/marca/${marca}`);
       if (!response.ok) throw new Error("Error al obtener productos por marca");
       return await response.json();
     } catch (error) {
@@ -67,10 +60,10 @@ export const UserProvider = ({ children }) => {
       return [];
     }
   };
-  
+
   const fetchProductosByTipo = async (tipo) => {
     try {
-      const response = await fetch(`http://localhost:2000/producto/tipo/${tipo}`);
+      const response = await fetch(ENDPOINT.products + `/tipo/${tipo}`);
       if (!response.ok) throw new Error("Error al obtener productos por tipo");
       return await response.json();
     } catch (error) {
@@ -78,10 +71,10 @@ export const UserProvider = ({ children }) => {
       return [];
     }
   };
-  
+
   const fetchProductosByCuerpo = async (cuerpo) => {
     try {
-      const response = await fetch(`http://localhost:2000/producto/cuerpo/${cuerpo}`);
+      const response = await fetch(ENDPOINT.products + `/cuerpo/${cuerpo}`);
       if (!response.ok) throw new Error("Error al obtener productos por cuerpo");
       return await response.json();
     } catch (error) {
@@ -89,11 +82,11 @@ export const UserProvider = ({ children }) => {
       return [];
     }
   };
-  
+
   const fetchObtenerProductosUsuario = async (id_usuario) => {
     try {
       const response = await fetch(
-        `http://localhost:2000/producto/usuario/${id_usuario}`
+        ENDPOINT.products + `/usuario/${id_usuario}`
       );
       const data = await response.json();
       if (!response.ok) {
@@ -109,7 +102,7 @@ export const UserProvider = ({ children }) => {
   const fetchCrearProducto = async (producto) => {
     console.log("Enviando producto al backend:", producto);
     try {
-      const response = await fetch("http://localhost:2000/producto/agregar", {
+      const response = await fetch(ENDPOINT.products + "/agregar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +119,7 @@ export const UserProvider = ({ children }) => {
   const fetchAgregarUsuario = async (usuario) => {
     try {
       const response = await axios.post(
-        "http://localhost:2000/usuario/register",
+        ENDPOINT.users + "/register",
         usuario
       );
       console.log("Respuesta del backend al registrar usuario:", response.data);
@@ -142,7 +135,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchLoginUsuario = async (email, pass) => {
     try {
-      const response = await fetch("http://localhost:2000/usuario/login", {
+      const response = await fetch(ENDPOINT.users + "/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, pass }),
@@ -150,25 +143,13 @@ export const UserProvider = ({ children }) => {
 
       if (!response.ok) throw new Error("Error en las credenciales");
       const data = await response.json();
-      const { token, nombre, apellido, email: emailResp, id_usuario, pass: passResp ,  fono} = data;
+      const { token } = data;
 
-      if (!id_usuario) throw new Error("El backend no retornó id_usuario correctamente");
+      if (!token) throw new Error("El backend no retornó id_usuario correctamente");
 
       localStorage.setItem("token", token);
-      localStorage.setItem("id_usuario", id_usuario);
-      localStorage.setItem("nombreUsuario", nombre || "");
-      localStorage.setItem("apellidoUsuario", apellido || "");
-      localStorage.setItem("emailUsuario", emailResp || "");
-      localStorage.setItem("passUsuario", passResp || "");
-      localStorage.setItem("fonoUsuario", fono || "");
 
       setToken(token);
-      setIdUsuario(id_usuario);
-      setNombreUsuario(nombre || "");
-      setApellidoUsuario(apellido || "");
-      setEmailUsuario(emailResp || "");
-      setPassUsuario(passResp || "");
-      setFonoUsuario(fono || "");
 
       return token;
     } catch (error) {
@@ -179,34 +160,22 @@ export const UserProvider = ({ children }) => {
 
   const cerrarSesion = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("id_usuario");
-    localStorage.removeItem("nombreUsuario");
-    localStorage.removeItem("apellidoUsuario");
-    localStorage.removeItem("emailUsuario");
-    localStorage.removeItem("passUsuario");
-    localStorage.removeItem("fonoUsuario");
 
     setToken("");
-    setIdUsuario("");
-    setNombreUsuario("");
-    setApellidoUsuario("");
-    setEmailUsuario("");
-    setPassUsuario("");
-    setFonoUsuario("");
   };
 
   const fetchUltimosProductos = async () => {
     try {
-      const response = await fetch("http://localhost:2000/producto/cincoultimos");
+      const response = await fetch(ENDPOINT.products + "/cincoultimos");
       return await response.json();
     } catch (error) {
       console.error("Error al obtener los últimos 5 productos:", error);
       return [];
     }
-  }; 
+  };
   const fetchDatosUsuarioPorProducto = async (id_producto) => {
     try {
-      const response = await fetch(`http://localhost:2000/usuario/producto/${id_producto}`);
+      const response = await fetch(ENDPOINT.products + `/producto/${id_producto}`);
       if (!response.ok) {
         throw new Error("Error al obtener los datos del usuario.");
       }
@@ -221,7 +190,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         productos,
-        fetchProductos,   
+        fetchProductos,
         fetchProductoById,
         fetchProductosByMarca,
         fetchProductosByTipo,
@@ -231,11 +200,6 @@ export const UserProvider = ({ children }) => {
         fetchLoginUsuario,
         token,
         setToken,
-        nombreUsuario,
-        apellidoUsuario,
-        emailUsuario,
-        passUsuario,
-        fonoUsuario,
         cerrarSesion,
         id_usuario,
         setIdUsuario,

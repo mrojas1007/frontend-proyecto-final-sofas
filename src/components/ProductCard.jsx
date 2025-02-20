@@ -5,11 +5,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import jwtDecode from "jwt-decode";
 
 const ProductCard = ({ producto, onClick }) => {
-    const { fetchObtenerProductosUsuario, id_usuario } = useContext(UserContext);
+    const { fetchObtenerProductosUsuario } = useContext(UserContext);
     const [productos, setProductos] = useState([]);
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const id_usuario = token ? jwtDecode(token).id_usuario : null;
 
     useEffect(() => {
         const obtenerProductos = async () => {
@@ -23,16 +26,15 @@ const ProductCard = ({ producto, onClick }) => {
     }, [id_usuario]);
 
     return (
-        <Row>
+        <Row className="m-3">
             {productos.length > 0 ? (
                 productos.map((producto) => (
-                    <Col key={producto.id_producto} md={4}>
-                        <Card onClick={onClick} style={{ width: '18rem', cursor: "pointer" }}>
+                    <Col key={producto.id_producto} sm={6} md={4} lg={3}>
+                        <Card onClick={onClick} style={{ cursor: "pointer" }}>
                             <Card.Img variant="top" src={producto.foto} />
                             <Card.Body>
                                 <Card.Title>{producto.nombre}</Card.Title>
-                                {/* <Card.Text>{producto.detalle}</Card.Text> */}
-                                  <Card.Text>{producto.marca}</Card.Text> 
+                                <Card.Text>{producto.marca}</Card.Text>
                             </Card.Body>
                             <Card.Footer>
                                 <Row>
@@ -44,12 +46,12 @@ const ProductCard = ({ producto, onClick }) => {
                                         stock :{producto.stock}
                                     </Col>
                                     <Col>
-                                    <Button 
-                        variant="warning" 
-                        onClick={() => navigate(`/product/${producto.id_producto}`)}
-                      >
-                        Ver Detalles
-                      </Button>
+                                        <Button
+                                            variant="warning"
+                                            onClick={() => navigate(`/product/${producto.id_producto}`)}
+                                        >
+                                            Ver Detalles
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Card.Footer>
