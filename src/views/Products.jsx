@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { Container, Row, Col, Dropdown, Stack, Card, Button } from "react-bootstrap";
-import "../css/Products.css"; // Importamos el archivo CSS
+import "../css/Products.css"; 
+import { formatPrice } from "../helpers/helpers";
 
 const Products = () => {
   const { fetchProductos, fetchProductosByMarca, fetchProductosByTipo, fetchProductosByCuerpo } = useContext(UserContext);
@@ -57,8 +58,8 @@ const Products = () => {
                   
                   <Card.Footer>
                     <Row>
-                      <Col className="text-center align-self-center">
-                        ${producto.precio}
+                    <Col className="text-center align-self-center">
+                        {formatPrice(producto.precio)} 
                       </Col>
                       <Col>
                         <Button 

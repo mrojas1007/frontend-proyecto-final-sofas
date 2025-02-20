@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { formatPrice } from "../helpers/helpers";
 
 const ProductCard = ({ producto, onClick }) => {
     const { fetchObtenerProductosUsuario, id_usuario } = useContext(UserContext);
@@ -30,14 +31,14 @@ const ProductCard = ({ producto, onClick }) => {
                         <Card onClick={onClick} style={{ width: '18rem', cursor: "pointer" }}>
                             <Card.Img variant="top" src={producto.foto} />
                             <Card.Body>
-                                <Card.Title>{producto.nombre}</Card.Title>
+                                <Card.Title>hola</Card.Title>
                                 {/* <Card.Text>{producto.detalle}</Card.Text> */}
                                   <Card.Text>{producto.marca}</Card.Text> 
                             </Card.Body>
                             <Card.Footer>
                                 <Row>
                                     <Col className='text-center align-self-center'>
-                                        ${producto.precio}
+                                    {formatPrice(producto.precio)} 
                                     </Col>
 
                                     <Col className='text-center align-self-center'>
