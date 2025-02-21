@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from "../assets/logo.svg";
+import logo from "../assets/sofapp-logo.svg";
 
 const Footer = () => {
     return (
