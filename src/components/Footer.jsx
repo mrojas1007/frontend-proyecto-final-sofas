@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from "../assets/logo.svg";
 
 const Footer = () => {
     return (
@@ -7,7 +8,7 @@ const Footer = () => {
             <div className="container text-center text-md-left">
                 <div className="row">
                     <div className="col-md-4">
-                        <img src="src/assets/sofapp-logo.svg" alt="Logo" width="50"
+                        <img src={logo} alt="Logo" width="50"
           height="50" className="mb-3" />
                     </div>
                     <div className="col-md-4">
