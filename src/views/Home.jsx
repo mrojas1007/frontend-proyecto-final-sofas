@@ -5,6 +5,9 @@ import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
 import { UserContext } from "../context/UserContext";
 import "../css/Home.css";
+import sofa1 from "../assets/sofa1.jpg";
+import sofa2 from "../assets/sofa2.jpg";
+import sofa3 from "../assets/sofa3.jpg";
 
 const Home = () => {
   const { fetchUltimosProductos } = useContext(UserContext);
@@ -28,21 +31,21 @@ const Home = () => {
         </div>
         <Carousel fade className="custom-carousel">
           <Carousel.Item>
-            <Image src="/src/assets/sofa1.jpg" fluid />
+            <Image src={sofa1} fluid />
             <Carousel.Caption>
               <h3>Encuentra todo lo que buscas</h3>
               <p>Todo tipo de sofás y sillones en un solo lugar</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Image src="/src/assets/sofa2.jpg" fluid />
+            <Image src={sofa2} fluid />
             <Carousel.Caption>
               <h3>Eficiente y amigable</h3>
               <p>Somos una plataforma líder en comercio electrónico</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <Image src="/src/assets/sofa3.jpg" fluid />
+            <Image src={sofa3} fluid />
             <Carousel.Caption>
               <h3>Publica todo lo que quieras</h3>
               <p>Conecta con otros compradores y vendedores</p>

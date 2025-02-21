@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import jwtDecode from "jwt-decode";
+import logo from '../assets/sofapp-logo.svg';
 
 function CustomNavbar() {
   const { token, cerrarSesion } = useContext(UserContext);
@@ -17,7 +18,7 @@ function CustomNavbar() {
       <Navbar.Brand href="/home">
         <div className="d-flex align-items-center">
           <img
-            src="/src/assets/sofapp-logo.svg"
+            src={logo}
             width="50"
             height="50"
             className="d-inline-block align-top me-2"
