@@ -1,6 +1,6 @@
-const dotenv = require('dotenv').config();
+// const dotenv = require('dotenv').config();
 
-export const URLBASE = process.env.URL_BACKEND;
+export const URLBASE = import.meta.env.URL_BACKEND;
 
 export const ENDPOINT = {
   products: `${URLBASE}/producto`,

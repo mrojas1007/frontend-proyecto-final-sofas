@@ -15,7 +15,7 @@ import Products from "./views/Products";
 import Product from "./views/Product";
 import ProductCard from "./components/ProductCard";
 import Politics from "./views/Politics";
-
+// require('dotenv').config();
 
 function App() {
   return (
