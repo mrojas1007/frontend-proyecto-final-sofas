@@ -130,8 +130,14 @@ const CreatePost = () => {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formBrand">
-              <Form.Label>Marca</Form.Label>
-              <Form.Control type="text" name="brand" value={formData.brand} onChange={handleChange} required />
+              <Form.Label>Selecciona una marca:</Form.Label>
+              <Form.Control as="select" name="brand" value={formData.brand} onChange={handleChange} required>
+                <option value="">Selecciona</option>
+                <option value="Rosen">Rosen</option>
+                <option value="Ikea">IKEA</option>
+                <option value="Mueblez">Mueblez vintaje</option>
+                <option value="Otra">Otra</option>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Col>

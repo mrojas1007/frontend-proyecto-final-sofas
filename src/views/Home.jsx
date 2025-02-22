@@ -23,11 +23,11 @@ const Home = () => {
 
   return (
     <Stack className="p-3">
+    <h1 className="text-uppercase text-center" >
+      El único marketplace de sofás en Chile
+    </h1>
       <Stack direction="horizontal" className="align-items-start justify-content-between">
         <div className="ContenedorH1">
-          <h1 className="text-uppercase text-center" >
-            El único marketplace de sofás en Chile
-          </h1>
         </div>
         <Carousel fade className="custom-carousel">
           <Carousel.Item>

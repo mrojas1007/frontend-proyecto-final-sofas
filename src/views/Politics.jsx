@@ -2,7 +2,7 @@ import React from 'react';
 
 const Politics = () => {
     return (
-        <div className="col-10 col-sm-10 col-md-10 m-auto mt-5 p-3 border border-dark rounded mb-5">
+        <div className="col-10 col-sm-10 col-md-10 mx-auto mt-5 px-3 pt-3 border border-dark rounded" style={{marginBottom: '50vh'}}>
             <h1 className="politics-title">Políticas del Marketplace</h1>
             <section className="politics-section">
                 <h3 className="politics-subtitle">Política de Privacidad</h3>
