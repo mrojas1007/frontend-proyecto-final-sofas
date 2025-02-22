@@ -29,8 +29,8 @@ const ProductCard = ({ producto, onClick }) => {
         <Row className="m-3">
             {productos.length > 0 ? (
                 productos.map((producto) => (
-                    <Col key={producto.id_producto} sm={6} md={4} lg={3}>
-                        <Card onClick={onClick} style={{ cursor: "pointer" }}>
+                    <Col key={producto.id_producto} sm={6} md={4} lg={3} className="">
+                        <Card onClick={onClick} style={{ cursor: "pointer" }} className="h-100">
                             <Card.Img variant="top" src={producto.foto} />
                             <Card.Body>
                                 <Card.Title>{producto.nombre}</Card.Title>
