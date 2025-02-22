@@ -175,7 +175,7 @@ export const UserProvider = ({ children }) => {
   };
   const fetchDatosUsuarioPorProducto = async (id_producto) => {
     try {
-      const response = await fetch(ENDPOINT.products + `/producto/${id_producto}`);
+      const response = await fetch(ENDPOINT.users + `/producto/${id_producto}`);
       if (!response.ok) {
         throw new Error("Error al obtener los datos del usuario.");
       }

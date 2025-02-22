@@ -41,7 +41,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
-      <div style={{minHeight: "40vh"}}></div>
+      {/* <div style={{minHeight: "40vh"}}></div> */}
       <Footer />
     </UserProvider>
   );
