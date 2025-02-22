@@ -81,7 +81,7 @@ useEffect(() => {
       </p>
 
       <Container id="filtros" className="mb-3">
-  <Stack direction="horizontal" gap={3} className="justify-content-center">
+  <Stack direction="horizontal" gap={2} className="justify-content-center">
     Filtrar por:
     
     <Dropdown onSelect={(eventKey) => setMarcaSeleccionada(eventKey)}>
