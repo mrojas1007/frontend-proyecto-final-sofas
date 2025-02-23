@@ -72,8 +72,6 @@ const Register = () => {
       <h1>Completar registro</h1>
       <hr />
 
-      {error && <p className="text-danger">{error}</p>}
-
       <div className="form-group mt-1">
         <label>Nombre</label>
         <input
@@ -145,6 +143,8 @@ const Register = () => {
           placeholder="Repite tu contraseña"
         />
       </div>
+
+      {error && <p className="text-danger mt-3">{error}</p>}
 
       <div className="d-flex justify-content-center">
         <button type="submit" className="btn btn-dark mt-3">
