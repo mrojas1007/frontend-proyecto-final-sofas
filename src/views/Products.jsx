@@ -2,25 +2,24 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { Container, Row, Col, Dropdown, Stack, Card, Button } from "react-bootstrap";
-import "../css/Products.css"; // Importamos el archivo CSS
 
 const Products = () => {
-  const { fetchProductos, fetchProductosByMarca, fetchProductosByTipo, fetchProductosByCuerpo } = useContext(UserContext);
-  const [productos, setProductos] = useState([]);
+  const { getProducts, fetchProductsByBrand, fetchProductsByType, fetchProductsByBody } = useContext(UserContext);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [marcaSeleccionada, setMarcaSeleccionada] = useState(null);
-  const [tipoSeleccionado, setTipoSeleccionado] = useState(null);
-  const [cuerpoSeleccionado, setCuerpoSeleccionado] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
+  const [selectedBody, setSelectedBody] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const cargarProductos = async () => {
+    const loadProducts = async () => {
       setLoading(true);
       try {
-        const data = await fetchProductos();
+        const data = await getProducts();
         if (Array.isArray(data)) {
-          setProductos(data);
+          setProducts(data);
         } else {
           throw new Error("La respuesta no es un array válido.");
         }
@@ -30,29 +29,28 @@ const Products = () => {
         setLoading(false);
       }
     };
-    cargarProductos();
+    loadProducts();
   }, []);
 
-// Cargar productos filtrados cuando se selecciona un filtro
 useEffect(() => {
-  const cargarProductosFiltrados = async () => {
+  const loadFilteredProducts = async () => {
     setLoading(true);
     try {
       let data = [];
       
-      if (marcaSeleccionada) {
-        data = await fetchProductosByMarca(marcaSeleccionada);
-      } else if (tipoSeleccionado) {
-        data = await fetchProductosByTipo(tipoSeleccionado);
-      } else if (cuerpoSeleccionado) {
-        data = await fetchProductosByCuerpo(cuerpoSeleccionado);
+      if (selectedBrand) {
+        data = await fetchProductsByBrand(selectedBrand);
+      } else if (selectedType) {
+        data = await fetchProductsByType(selectedType);
+      } else if (selectedBody) {
+        data = await fetchProductsByBody(selectedBody);
       } else {
         // Si no hay filtros seleccionados, carga todos los productos nuevamente
-        data = await fetchProductos();
+        data = await getProducts();
       }
 
       if (Array.isArray(data)) {
-        setProductos(data);
+        setProducts(data);
       } else {
         throw new Error("La respuesta no es un array válido.");
       }
@@ -65,10 +63,10 @@ useEffect(() => {
 
   
   // Solo ejecutamos la búsqueda si hay algún filtro seleccionado
-  if (marcaSeleccionada || tipoSeleccionado || cuerpoSeleccionado) {
-    cargarProductosFiltrados();
+  if (selectedBrand || selectedType || selectedBody) {
+    loadFilteredProducts();
   }
-}, [marcaSeleccionada, tipoSeleccionado, cuerpoSeleccionado]);
+}, [selectedBrand, selectedType, selectedBody]);
 
   if (loading) return <p className="text-center">Cargando productos...</p>;
   if (error) return <p className="text-center text-danger">Error: {error}</p>;
@@ -84,9 +82,9 @@ useEffect(() => {
   <Stack direction="horizontal" gap={2} className="justify-content-center">
     Filtrar por:
     
-    <Dropdown onSelect={(eventKey) => setMarcaSeleccionada(eventKey)}>
+    <Dropdown onSelect={(eventKey) => setSelectedBrand(eventKey)}>
       <Dropdown.Toggle variant="success">
-        {marcaSeleccionada || "Marca"}
+        {selectedBrand || "Marca"}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item eventKey="Mueblez vintaje">Mueblez vintaje</Dropdown.Item>
@@ -96,9 +94,9 @@ useEffect(() => {
       </Dropdown.Menu>
     </Dropdown>
     
-    <Dropdown onSelect={(eventKey) => setTipoSeleccionado(eventKey)}>
+    <Dropdown onSelect={(eventKey) => setSelectedType(eventKey)}>
       <Dropdown.Toggle variant="success">
-        {tipoSeleccionado || "Tipo"}
+        {selectedType || "Tipo"}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item eventKey="Sillon">Sillón</Dropdown.Item>
@@ -107,9 +105,9 @@ useEffect(() => {
       </Dropdown.Menu>
     </Dropdown>
 
-    <Dropdown onSelect={(eventKey) => setCuerpoSeleccionado(eventKey)}>
+    <Dropdown onSelect={(eventKey) => setSelectedBody(eventKey)}>
       <Dropdown.Toggle variant="success">
-        {cuerpoSeleccionado || "Cuerpo"}
+        {selectedBody || "Cuerpo"}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item eventKey="1">1 cuerpo</Dropdown.Item>
@@ -131,10 +129,10 @@ useEffect(() => {
 
 
       <Row className="mb-3">
-        {productos.length === 0 ? (
+        {products.length === 0 ? (
           <p className="text-center w-100">No hay productos disponibles.</p>
         ) : (
-          productos.map((producto) => (
+          products.map((producto) => (
             <Col key={producto.id_producto} sm={6} md={4} lg={3} className="">
               <Card className="h-100">
                 <Card.Body>

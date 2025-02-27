@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Stack from "react-bootstrap/Stack";
 import { UserContext } from "../context/UserContext";
@@ -10,15 +9,15 @@ import sofa2 from "../assets/sofa2.jpg";
 import sofa3 from "../assets/sofa3.jpg";
 
 const Home = () => {
-  const { fetchUltimosProductos } = useContext(UserContext);
-  const [ultimosProductos, setUltimosProductos] = useState([]);
+  const { fetchNewestProducts } = useContext(UserContext);
+  const [newestProducts, setNewestProducts] = useState([]);
 
   useEffect(() => {
-    const cargarUltimosProductos = async () => {
-      const data = await fetchUltimosProductos();
-      setUltimosProductos(data);
+    const loadNewestProducts = async () => {
+      const data = await fetchNewestProducts();
+      setNewestProducts(data);
     };
-    cargarUltimosProductos();
+    loadNewestProducts();
   }, []);
 
   return (
@@ -57,16 +56,16 @@ const Home = () => {
       <div>
         <h2 className="text-center">Recién agregados</h2>
         <Carousel fade className="custom-carousel">
-          {ultimosProductos.length === 0 ? (
+          {newestProducts.length === 0 ? (
             <p className="text-center">No hay productos recientes.</p>
           ) : (
-            ultimosProductos.map((producto) => (
-              <Carousel.Item key={producto.id_producto}>
+            newestProducts.map((product) => (
+              <Carousel.Item key={product.id_producto}>
                 <div className="d-flex justify-content-center">
-                  <Image src={producto.foto} fluid className="w-50" />
+                  <Image src={product.foto} fluid className="w-50" />
                 </div>
                 <Carousel.Caption>
-                  <h5>{producto.nombre}</h5>            
+                  <h5>{product.nombre}</h5>            
                 </Carousel.Caption>
               </Carousel.Item>
             ))

@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { fetchLoginUsuario } = useContext(UserContext);
+  const { fetchUserLogin } = useContext(UserContext);
   const [user, setUser] = useState({ email: "", pass: "" });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -16,11 +16,12 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const token = await fetchLoginUsuario(user.email, user.pass);
+      const token = await fetchUserLogin(user.email, user.pass);
       if (token) {
         navigate("/profile");
       }
     } catch (error) {
+      console.error(error.message);
       window.alert("Error al iniciar sesión. Verifica tus credenciales.");
     }
   };

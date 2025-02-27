@@ -4,7 +4,7 @@ import UserContext from "../context/UserContext";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { fetchAgregarUsuario } = useContext(UserContext);
+  const { fetchAgregarUsuario: fetchAddUser } = useContext(UserContext);
 
   const [user, setUser] = useState({
     nombre: "",
@@ -22,7 +22,7 @@ const Register = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const validarContraseña = (password) => {
+  const validatePassword = (password) => {
     return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
   };
 
@@ -36,7 +36,7 @@ const Register = () => {
       return;
     }
     
-    if (!validarContraseña(user.password)) {
+    if (!validatePassword(user.password)) {
       setError("La contraseña debe tener al menos 6 caracteres, incluyendo letras y números.");
       return;
     }
@@ -47,7 +47,7 @@ const Register = () => {
     }
 
     try {
-      const nuevoUsuario = {
+      const newUser = {
         nombre: user.nombre,
         apellido: user.apellido,
         email: user.email,
@@ -55,7 +55,7 @@ const Register = () => {
         fono: user.fono,
       };
 
-      await fetchAgregarUsuario(nuevoUsuario);
+      await fetchAddUser(newUser);
       alert("Registro exitoso, ahora puedes iniciar sesión.");
       navigate("/login");
     } catch (error) {
@@ -111,13 +111,14 @@ const Register = () => {
       <div className="form-group mt-1">
         <label>Telefono</label>
         <input
-          value={user.fono}
-          onChange={handleUser}
-          type="fono"
-          name="fono"
-          className="form-control"
-          placeholder=" +56 9xxxxxxxx "
-        />
+  value={user.fono}
+  onChange={handleUser}
+  type="tel"
+  name="fono"
+  className="form-control"
+  placeholder="+56 9xxxxxxxx"
+/>
+
       </div>
 
       <div className="form-group mt-1">
@@ -147,9 +148,14 @@ const Register = () => {
       {error && <p className="text-danger mt-3">{error}</p>}
 
       <div className="d-flex justify-content-center">
-        <button type="submit" className="btn btn-dark mt-3">
-          Registrar
-        </button>
+      <button 
+  type="submit" 
+  className="btn btn-dark mt-3"
+  disabled={!user.nombre || !user.apellido || !user.email || !user.password || !user.confirmPassword || !user.fono}
+>
+  Registrar
+</button>
+
       </div>
     </form>
   );
