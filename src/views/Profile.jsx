@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
+import { Form, Container, Row, Col } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 
@@ -24,7 +24,7 @@ const Profile = () => {
       email: decodedToken.email,
       fono: decodedToken.fono,
     });
-  });
+  }, []);  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,9 +89,6 @@ const Profile = () => {
               />
             </Form.Group>
 
-            {/* <Button variant="primary" type="submit">
-              Guardar Cambios
-            </Button> */}
           </Form>
         </Col>
       </Row>

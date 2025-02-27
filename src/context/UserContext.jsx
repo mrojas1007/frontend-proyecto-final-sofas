@@ -5,15 +5,15 @@ import { ENDPOINT } from "../config/constants";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [productos, setProductos] = useState([]);
-  const [id_usuario, setIdUsuario] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [id_usuario, setUserId] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   useEffect(() => {
-    setIdUsuario(localStorage.getItem("id_usuario") || "");
+    setUserId(localStorage.getItem("id_usuario") || "");
   }, []);
 
-  const fetchProductos = async () => {
+  const getProducts = async () => {
     try {
       const response = await fetch(ENDPOINT.products + "/todos");
       if (!response.ok) throw new Error("Error al obtener productos");
@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
 
       if (!Array.isArray(data)) throw new Error("La respuesta no es un array válido");
 
-      setProductos(data);
+      setProducts(data);
       return data;
     } catch (error) {
       console.error("Error al obtener productos:", error);
@@ -30,14 +30,14 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchProductoById = async (id) => {
+  const fetchProductById = async (id) => {
     try {
-      const productoId = parseInt(id, 10);
-      if (isNaN(productoId)) throw new Error("ID de producto inválido");
+      const productId = parseInt(id, 10);
+      if (isNaN(productId)) throw new Error("ID de producto inválido");
 
       const response = await fetch(
         ENDPOINT.products +
-        `/${productoId}`
+        `/${productId}`
       );
       if (!response.ok) throw new Error("No se encontró el producto");
 
@@ -48,7 +48,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchProductosByMarca = async (marca) => {
+  const fetchProductsByBrand = async (marca) => {
     try {
       const response = await fetch(
         ENDPOINT.products +
@@ -61,7 +61,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchProductosByTipo = async (tipo) => {
+  const fetchProductsByType = async (tipo) => {
     try {
       const response = await fetch(ENDPOINT.products + `/tipo/${tipo}`);
       if (!response.ok) throw new Error("Error al obtener productos por tipo");
@@ -72,7 +72,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchProductosByCuerpo = async (cuerpo) => {
+  const fetchProductsByBody = async (cuerpo) => {
     try {
       const response = await fetch(ENDPOINT.products + `/cuerpo/${cuerpo}`);
       if (!response.ok) throw new Error("Error al obtener productos por cuerpo");
@@ -83,7 +83,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchObtenerProductosUsuario = async (id_usuario) => {
+  const getProductsByUser = async (id_usuario) => {
     try {
       const response = await fetch(
         ENDPOINT.products + `/usuario/${id_usuario}`
@@ -99,7 +99,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchCrearProducto = async (producto) => {
+  const fetchCreateProduct = async (producto) => {
     console.log("Enviando producto al backend:", producto);
     try {
       const response = await fetch(ENDPOINT.products + "/agregar", {
@@ -116,7 +116,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchAgregarUsuario = async (usuario) => {
+  const fetchRegisterUser = async (usuario) => {
     try {
       const response = await axios.post(
         ENDPOINT.users + "/register",
@@ -133,7 +133,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const fetchLoginUsuario = async (email, pass) => {
+  const fetchUserLogin = async (email, pass) => {
     try {
       const response = await fetch(ENDPOINT.users + "/login", {
         method: "POST",
@@ -158,13 +158,13 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const cerrarSesion = () => {
+  const logout = () => {
     localStorage.removeItem("token");
 
     setToken("");
   };
 
-  const fetchUltimosProductos = async () => {
+  const fetchNewestProducts = async () => {
     try {
       const response = await fetch(ENDPOINT.products + "/cincoultimos");
       return await response.json();
@@ -173,8 +173,9 @@ export const UserProvider = ({ children }) => {
       return [];
     }
   };
-  const fetchDatosUsuarioPorProducto = async (id_producto) => {
+  const fetchUserDataByProduct = async (id_producto) => {
     try {
+      // throw new Error("fetchUserDataByProduct");
       const response = await fetch(ENDPOINT.users + `/producto/${id_producto}`);
       if (!response.ok) {
         throw new Error("Error al obtener los datos del usuario.");
@@ -189,23 +190,23 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        productos,
-        fetchProductos,
-        fetchProductoById,
-        fetchProductosByMarca,
-        fetchProductosByTipo,
-        fetchProductosByCuerpo,
-        fetchCrearProducto,
-        fetchAgregarUsuario,
-        fetchLoginUsuario,
+        products,
+        getProducts,
+        fetchProductById,
+        fetchProductsByBrand,
+        fetchProductsByType,
+        fetchProductsByBody,
+        fetchCreateProduct,
+        fetchRegisterUser,
+        fetchUserLogin,
         token,
         setToken,
-        cerrarSesion,
+        logout,
         id_usuario,
-        setIdUsuario,
-        fetchObtenerProductosUsuario,
-        fetchUltimosProductos,
-        fetchDatosUsuarioPorProducto,
+        setUserId,
+        getProductsByUser,
+        fetchNewestProducts,
+        fetchUserDataByProduct,
       }}
     >
       {children}
