@@ -10,7 +10,7 @@ import logo from '../assets/sofapp-logo.svg';
 import { Link } from "react-router-dom";
 
 function CustomNavbar() {
-  const { token, cerrarSesion } = useContext(UserContext);
+  const { token, logout } = useContext(UserContext);
   const decodedToken = token ? jwtDecode(token) : null;
   const nombreUsuario = decodedToken ? decodedToken.nombre : null;
   return (
@@ -33,7 +33,7 @@ function CustomNavbar() {
         <Nav className="me-auto">
           <Nav.Link as={Link} to={'/'}>Inicio</Nav.Link>
           <Nav.Link as={Link} to={'/products'}>Productos</Nav.Link>
-          <Nav.Link as={Link} to={'/politics'}>Políticas</Nav.Link>
+          <Nav.Link as={Link} to={'/policies'}>Políticas</Nav.Link>
 
         </Nav>
         <Nav>
@@ -52,7 +52,7 @@ function CustomNavbar() {
               <div className="navbar-text me-3">
                 Bienvenido, <div>{nombreUsuario}</div>
               </div>
-              <Button variant="danger" onClick={cerrarSesion}>
+              <Button variant="danger" onClick={logout}>
                 Cerrar sesión
               </Button>
             </>

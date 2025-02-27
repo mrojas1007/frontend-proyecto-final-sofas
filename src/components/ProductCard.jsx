@@ -9,7 +9,7 @@ import jwtDecode from "jwt-decode";
 import { formatPrice } from "../helpers/helpers";
 
 const ProductCard = ({ producto, onClick }) => {
-    const { fetchObtenerProductosUsuario } = useContext(UserContext);
+    const { getProductsByUser } = useContext(UserContext);
     const [productos, setProductos] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -18,7 +18,7 @@ const ProductCard = ({ producto, onClick }) => {
     useEffect(() => {
         const obtenerProductos = async () => {
             if (id_usuario) {
-                const productosObtenidos = await fetchObtenerProductosUsuario(id_usuario);
+                const productosObtenidos = await getProductsByUser(id_usuario);
                 setProductos(productosObtenidos);
             }
         };
