@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import jwtDecode from "jwt-decode";
+import { formatPrice } from "../helpers/helpers";
 
 const ProductCard = ({ producto, onClick }) => {
     const { fetchObtenerProductosUsuario } = useContext(UserContext);
@@ -39,7 +40,7 @@ const ProductCard = ({ producto, onClick }) => {
                             <Card.Footer>
                                 <Row>
                                     <Col className='text-center align-self-center'>
-                                        ${producto.precio}
+                                    <strong>Precio:</strong>{formatPrice(producto.precio)}
                                     </Col>
 
                                     <Col className='text-center align-self-center'>

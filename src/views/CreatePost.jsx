@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 
 const CreatePost = () => {
-  const { fetchCrearProducto } = useContext(UserContext);
+  const { fetchCrearProducto: postNewProduct } = useContext(UserContext);
   const token = localStorage.getItem("token");
   const id_usuario = token ? jwtDecode(token).id_usuario : null;
   
@@ -54,7 +54,7 @@ const CreatePost = () => {
       stock: formData.stock,
       color: formData.color,
     };
-    const response = await fetchCrearProducto(productData);
+    const response = await postNewProduct(productData);
     if (response && response.msg) {
       alert("Producto agregado con éxito!");
       setFormData({

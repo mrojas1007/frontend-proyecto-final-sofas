@@ -14,7 +14,7 @@ import CreatePost from "./views/CreatePost";
 import Products from "./views/Products";
 import Product from "./views/Product";
 import ProductCard from "./components/ProductCard";
-import Politics from "./views/Politics";
+import Policies from "./views/Policies";
 // require('dotenv').config();
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
                 <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-                <Route path="/politics" element={<Politics />} />
+                <Route path="/policies" element={<Policies/>} />
 
                 {/* Rutas protegidas */}
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
