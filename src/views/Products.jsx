@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { Container, Row, Col, Dropdown, Stack, Card, Button } from "react-bootstrap";
+import { formatPrice } from "../helpers/helpers";
 
 const Products = () => {
   const { getProducts, fetchProductsByBrand, fetchProductsByType, fetchProductsByBody } = useContext(UserContext);
@@ -45,7 +46,7 @@ useEffect(() => {
       } else if (selectedBody) {
         data = await fetchProductsByBody(selectedBody);
       } else {
-        // Si no hay filtros seleccionados, carga todos los productos nuevamente
+        // Recarga de productos
         data = await getProducts();
       }
 
@@ -143,7 +144,7 @@ useEffect(() => {
                 <Card.Footer>
                   <Row>
                     <Col className="text-center align-self-center">
-                      ${producto.precio}
+                    <strong>Precio: </strong>{formatPrice(producto.precio)}
                     </Col>
                     <Col>
                       <Button

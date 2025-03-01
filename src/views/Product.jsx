@@ -83,7 +83,7 @@ const Product = () => {
                     </Button>
                   </Card.Body>
                   {/* Contenedor de datos del cliente */}
-                  <div className="contenedorDatosCliente mt-4 p-3 border rounded">
+                  <div className="m-4 p-3 border rounded">
                     <h5>Información del vendedor</h5>
                     {userData ? (
                       <>
@@ -119,7 +119,7 @@ const Product = () => {
               </Row>
 
             </Card>
-            <div>
+            <div className="mt-4">
               <strong>Descripcion:</strong>
               <Card.Text className="product-description">
                 {product.detalle}

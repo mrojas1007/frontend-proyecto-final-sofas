@@ -2,7 +2,7 @@ import React from 'react';
 
 const PoliciesView = () => {
     return (
-        <div className="col-10 col-sm-10 col-md-10 mx-auto mt-5 px-3 pt-3 border border-dark rounded" style={{marginBottom: '50vh'}}>
+        <div className="col-10 col-sm-10 col-md-10 mx-auto mt-5 px-3 pt-3 border border-dark rounded">
             <h1 className="policies-title">Políticas del Marketplace</h1>
             <section className="policies-section">
                 <h3 className="policies-subtitle">Política de Privacidad</h3>
