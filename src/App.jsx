@@ -13,7 +13,7 @@ import Profile from "./views/Profile";
 import CreatePost from "./views/CreatePost";
 import Products from "./views/Products";
 import Product from "./views/Product";
-import ProductCard from "./components/ProductCard";
+import MyProducts from "./views/MyProducts";
 import Policies from "./views/Policies";
 // require('dotenv').config();
 
@@ -35,13 +35,13 @@ function App() {
                 {/* Rutas protegidas */}
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/CreatePost" element={<ProtectedRoute><CreatePost /></ProtectedRoute>} />
-          <Route path="/productCard" element={<ProtectedRoute><ProductCard /></ProtectedRoute>} />
+          <Route path="/MyProducts" element={<ProtectedRoute><MyProducts /></ProtectedRoute>} />
 
           {/* Ruta por defecto */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
-      {/* <div style={{minHeight: "40vh"}}></div> */}
+      <div style={{minHeight: "46vh"}}></div>
       <Footer />
     </UserProvider>
   );
