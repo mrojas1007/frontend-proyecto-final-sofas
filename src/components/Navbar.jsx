@@ -48,7 +48,7 @@ function CustomNavbar() {
             <>
               <Nav.Link as={Link} to={"/profile"}>Perfil</Nav.Link>
               <Nav.Link as={Link} to={"/CreatePost"}>Crear Publicación</Nav.Link>
-              <Nav.Link as={Link} to={"/productCard"}>Mis Productos</Nav.Link>
+              <Nav.Link as={Link} to={"/MyProducts"}>Mis Productos</Nav.Link>
               <div className="navbar-text me-3">
                 Bienvenido, <div>{nombreUsuario}</div>
               </div>

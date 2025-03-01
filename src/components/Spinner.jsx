@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MySpinner = () => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState("");
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setData("");
       setLoading(false);
-    }, 2000);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -26,3 +29,4 @@ const MySpinner = () => {
 };
 
 export default MySpinner;
+

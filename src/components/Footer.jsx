@@ -4,7 +4,7 @@ import logo from "../assets/sofapp-logo.svg";
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-white pt-4">
+        <footer className="bg-dark text-white pt-4 mt-auto">
             <div className="container text-center text-md-left">
                 <div className="row">
                     <div className="col-md-4">
