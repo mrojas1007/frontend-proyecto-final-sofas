@@ -187,6 +187,35 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const fetchUpdateStock = async (id_producto, cantidad) => {
+    try {
+      if (!id_producto || cantidad === undefined) {
+        throw new Error("ID del producto y cantidad son obligatorios");
+      }
+  
+      const response = await fetch(ENDPOINT.products + "/stock", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id_producto, cantidad }),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.error || "Error al actualizar el stock");
+      }
+  
+      console.log("Stock actualizado correctamente:", data);
+      return data;
+    } catch (error) {
+      console.error("Error al actualizar stock:", error.message);
+      return null;
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -207,6 +236,7 @@ export const UserProvider = ({ children }) => {
         getProductsByUser,
         fetchNewestProducts,
         fetchUserDataByProduct,
+        fetchUpdateStock,
       }}
     >
       {children}
