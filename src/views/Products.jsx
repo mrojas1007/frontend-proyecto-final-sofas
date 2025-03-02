@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { Container, Row, Col, Dropdown, Stack, Card, Button } from "react-bootstrap";
 import { formatPrice } from "../helpers/helpers";
+import Spinner from "../components/Spinner";
 
 const Products = () => {
   const { getProducts, fetchProductsByBrand, fetchProductsByType, fetchProductsByBody } = useContext(UserContext);
@@ -69,7 +70,7 @@ useEffect(() => {
   }
 }, [selectedBrand, selectedType, selectedBody]);
 
-  if (loading) return <p className="text-center">Cargando productos...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p className="text-center text-danger">Error: {error}</p>;
 
   return (
