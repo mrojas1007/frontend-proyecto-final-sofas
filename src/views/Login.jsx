@@ -7,13 +7,24 @@ const Login = () => {
   const { fetchUserLogin } = useContext(UserContext);
   const [user, setUser] = useState({ email: "", pass: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState({ email: false, pass: false, notRegistered: false });
 
   const handleUser = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
+    setError({ ...error, [event.target.name]: false, notRegistered: false });
   };
 
   const handleForm = async (event) => {
     event.preventDefault();
+    
+    const newError = {
+      email: user.email.trim() === "",
+      pass: user.pass.trim() === "",
+      notRegistered: false
+    };
+    setError(newError);
+
+    if (newError.email || newError.pass) return;
 
     try {
       const token = await fetchUserLogin(user.email, user.pass);
@@ -21,8 +32,11 @@ const Login = () => {
         navigate("/profile");
       }
     } catch (error) {
-      console.error(error.message);
-      window.alert("Error al iniciar sesión. Verifica tus credenciales.");
+      if (error.message === "EMAIL_NOT_FOUND") {
+        setError((prev) => ({ ...prev, notRegistered: true }));
+      } else {
+        window.alert("Error al iniciar sesión. Verifica tus credenciales.");
+      }
     }
   };
 
@@ -33,6 +47,21 @@ const Login = () => {
     >
       <h1>Iniciar Sesión</h1>
       <hr />
+
+      {/* Alerta si el email no está registrado */}
+      {error.notRegistered && (
+        <div className="alert alert-warning text-center" role="alert">
+          El email no registrado. Para registrarte pincha{" "}
+          <button
+            className="btn btn-link p-0"
+            onClick={() => navigate("/register")}
+            style={{ color: "blue", textDecoration: "underline", border: "none", background: "none" }}
+          >
+             Aquí 
+          </button>
+        </div>
+      )}
+
       <div className="form-group mt-1">
         <label>Email</label>
         <input
@@ -40,9 +69,10 @@ const Login = () => {
           onChange={handleUser}
           type="email"
           name="email"
-          className="form-control"
+          className={`form-control ${error.email ? "is-invalid" : ""}`}
           placeholder="ej. juan.perez@gmail.com"
         />
+        {error.email && <div className="invalid-feedback">Debe completar este campo.</div>}
       </div>
 
       <div className="form-group mt-1 position-relative">
@@ -53,7 +83,7 @@ const Login = () => {
             onChange={handleUser}
             type={showPassword ? "text" : "password"}
             name="pass"
-            className="form-control"
+            className={`form-control ${error.pass ? "is-invalid" : ""}`}
             placeholder="Contraseña"
           />
           <button
@@ -78,6 +108,7 @@ const Login = () => {
             ></i>
           </button>
         </div>
+        {error.pass && <div className="invalid-feedback">Debe completar este campo.</div>}
       </div>
 
       <div className="d-flex justify-content-center">

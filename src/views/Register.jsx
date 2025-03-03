@@ -31,13 +31,22 @@ const Register = () => {
     setError("");
 
     // Validaciones
-    if (!user.nombre || !user.apellido || !user.email || !user.password || !user.confirmPassword || !user.fono) {
+    if (
+      !user.nombre ||
+      !user.apellido ||
+      !user.email ||
+      !user.password ||
+      !user.confirmPassword ||
+      !user.fono
+    ) {
       setError("Todos los campos son obligatorios.");
       return;
     }
-    
+
     if (!validatePassword(user.password)) {
-      setError("La contraseña debe tener al menos 6 caracteres, incluyendo letras y números.");
+      setError(
+        "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números."
+      );
       return;
     }
 
@@ -59,8 +68,15 @@ const Register = () => {
       alert("Registro exitoso, ahora puedes iniciar sesión.");
       navigate("/login");
     } catch (error) {
-      setError("Error al registrar usuario. Inténtalo nuevamente.");
-      console.error("Error al registrar usuario:", error);
+      if (error.response?.status === 400) {
+        const errorMessage =
+          error.response.data?.msg ||
+          "Error al registrar usuario1. Inténtalo nuevamente.";
+
+        setError(errorMessage);
+      } else {
+        setError("El email ya está registrado. Usa otro.");
+      }
     }
   };
 
@@ -111,14 +127,13 @@ const Register = () => {
       <div className="form-group mt-1">
         <label>Telefono</label>
         <input
-  value={user.fono}
-  onChange={handleUser}
-  type="tel"
-  name="fono"
-  className="form-control"
-  placeholder="+56 9xxxxxxxx"
-/>
-
+          value={user.fono}
+          onChange={handleUser}
+          type="tel"
+          name="fono"
+          className="form-control"
+          placeholder="+56 9xxxxxxxx"
+        />
       </div>
 
       <div className="form-group mt-1">
@@ -148,14 +163,20 @@ const Register = () => {
       {error && <p className="text-danger mt-3">{error}</p>}
 
       <div className="d-flex justify-content-center">
-      <button 
-  type="submit" 
-  className="btn btn-dark mt-3"
-  disabled={!user.nombre || !user.apellido || !user.email || !user.password || !user.confirmPassword || !user.fono}
->
-  Registrar
-</button>
-
+        <button
+          type="submit"
+          className="btn btn-dark mt-3"
+          disabled={
+            !user.nombre ||
+            !user.apellido ||
+            !user.email ||
+            !user.password ||
+            !user.confirmPassword ||
+            !user.fono
+          }
+        >
+          Registrar
+        </button>
       </div>
     </form>
   );
