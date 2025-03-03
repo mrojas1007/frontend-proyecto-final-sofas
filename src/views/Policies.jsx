@@ -24,9 +24,9 @@ const PoliciesView = () => {
             </section>
 
             <section className="policies-section">
-                <h3 className="policies-subtitle">Política de Pagina</h3>
+                <h3 className="policies-subtitle">Política de Página</h3>
                 <p className="policies-text">
-                Esta página no se hace responsable de las negociaciones que se realicen entre el cliente y el vendedor en relación con la venta de productos. El sitio está diseñado exclusivamente para promocionar sillones y sofás, permitiendo a los vendedores llevar a cabo la venta de sus productos. Las negociaciones y acuerdos que se establezcan son responsabilidad exclusiva de las partes involucradas (cliente y vendedor).
+                Esta página no se hace responsable de las negociaciones que se realicen entre el cliente y el vendedor en relación con la venta de productos. El sitio está diseñado exclusivamente para promocionar sillones y sofás, permitiendo a los vendedores llevar a cabo la venta de sus productos. Las negociaciones y acuerdos que se establezcan son responsabilidad exclusiva de las partes involucradas cliente y vendedor.
                 </p>
             </section>
         </div>
