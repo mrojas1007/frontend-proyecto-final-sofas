@@ -121,15 +121,10 @@ export const UserProvider = ({ children }) => {
       const response = await axios.post(
         ENDPOINT.users + "/register",
         usuario
-      );
-      console.log("Respuesta del backend al registrar usuario:", response.data);
+      ); 
       return response.data;
     } catch (error) {
-      console.error(
-        "Error al registrar usuario:",
-        error.response?.data || error.message || error
-      );
-      throw error;
+      throw new Error(error.response?.data?.msg || "Error desconocido");   
     }
   };
 
@@ -140,17 +135,24 @@ export const UserProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, pass }),
       });
-
-      if (!response.ok) throw new Error("Error en las credenciales");
+  
       const data = await response.json();
+      
+      if (response.status === 404 && data.msg === "EMAIL_NOT_FOUND") {
+        throw new Error("EMAIL_NOT_FOUND");
+      }
+  
+      if (!response.ok) {
+        throw new Error("Error en las credenciales");
+      }
+  
       const { token } = data;
-
+  
       if (!token) throw new Error("El backend no retornó id_usuario correctamente");
-
+  
       localStorage.setItem("token", token);
-
       setToken(token);
-
+  
       return token;
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message || error);
