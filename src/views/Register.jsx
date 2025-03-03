@@ -4,7 +4,7 @@ import UserContext from "../context/UserContext";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { fetchAgregarUsuario: fetchAddUser } = useContext(UserContext);
+  const { fetchRegisterUser } = useContext(UserContext);
 
   const [user, setUser] = useState({
     nombre: "",
@@ -55,7 +55,7 @@ const Register = () => {
         fono: user.fono,
       };
 
-      await fetchAddUser(newUser);
+      await fetchRegisterUser(newUser);
       alert("Registro exitoso, ahora puedes iniciar sesión.");
       navigate("/login");
     } catch (error) {

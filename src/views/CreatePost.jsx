@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 
 const CreatePost = () => {
-  const { fetchCrearProducto: postNewProduct } = useContext(UserContext);
+  const { fetchCreateProduct } = useContext(UserContext);
   const token = localStorage.getItem("token");
   const id_usuario = token ? jwtDecode(token).id_usuario : null;
   
@@ -54,7 +54,7 @@ const CreatePost = () => {
       stock: formData.stock,
       color: formData.color,
     };
-    const response = await postNewProduct(productData);
+    const response = await fetchCreateProduct(productData);
     if (response && response.msg) {
       alert("Producto agregado con éxito!");
       setFormData({
@@ -111,6 +111,13 @@ const CreatePost = () => {
                 <option value="">Selecciona</option>
                 <option value="blanco">Blanco</option>
                 <option value="negro">Negro</option>
+                <option value="azul">Azul</option>
+                <option value="cafe">Café</option>
+                <option value="plomo">Plomo</option>
+                <option value="rojo">Rojo</option>
+                <option value="burdeo">Burdeo</option>
+                <option value="verde">Verde</option>
+                <option value="amarillo">Amarillo</option>
               </Form.Control>
             </Form.Group>
           </Col>
