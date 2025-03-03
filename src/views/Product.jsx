@@ -74,10 +74,10 @@ const Product = () => {
                       <strong>Alto:</strong> {product.alto} cm
                     </Card.Text>
                     <Card.Text className="product-price">
-                      <strong>Precio:</strong> ${product.precio}
+                      <strong>Precio:</strong>{formatPrice(product.precio)}
                     </Card.Text>
                     <Card.Text>
-                      <strong>Stock:</strong> {formatPrice(producto.precio)}
+                      <strong>Stock:</strong> {product.stock}
                     </Card.Text>
                     <Button variant="secondary" onClick={() => navigate(-1)}>
                       Volver atrás
